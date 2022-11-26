@@ -11,3 +11,5 @@ sed -i -e "1 c ALTER USER 'root'@'localhost' IDENTIFIED BY 'Roboshop@1';" /tmp/r
 DEFAULT_PASSWORD=$(grep 'A temporary password'  /var/log/mysqld.log | awk '{print $NF}')
 
 #cat /tmp/root-pass-sql | mysql --connect-expired-password -uroot -p"#R4rd9w>XCo>"
+
+
