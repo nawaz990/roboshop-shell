@@ -22,7 +22,7 @@ else
   echo FAILURE
 fi
 
-echo Start MySQL
+echo Enable MySQL Service
 systemctl enable mysqld
 if [ $? -ne 0 ]; then
   echo SUCCESS
@@ -30,6 +30,7 @@ else
   echo FAILURE
 fi
 
+echo Start MySQL Service
 systemctl restart mysqld
 if [ $? -ne 0 ]; then
   echo SUCCESS
