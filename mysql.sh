@@ -4,7 +4,13 @@ if [ $? -ne o ]; then
 else
   echo FAILURE
 fi
+
 dnf module disable mysql -y
+if [ $? -ne o ]; then
+  echo SUCCESS
+else
+  echo FAILURE
+fi
 
 yum install mysql-community-server -y
 
