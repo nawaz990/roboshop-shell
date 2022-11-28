@@ -27,6 +27,11 @@ else
 fi
 
 systemctl restart mysqld
+if [ $? -ne 0 ]; then
+  echo SUCCESS
+else
+  echo FAILURE
+fi
 
 echo show databases | mysql -uroot -pRoboshop@1
 if [ $? -ne o ]
