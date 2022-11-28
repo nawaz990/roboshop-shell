@@ -1,18 +1,23 @@
 curl -s -L -o /etc/yum.repos.d/mysql.repo https://raw.githubusercontent.com/roboshop-devops-project/mysql/main/mysql.repo
-if [ $? -ne o ]; then
+if [ $? -ne 0 ]; then
   echo SUCCESS
 else
   echo FAILURE
 fi
 
 dnf module disable mysql -y
-if [ $? -ne o ]; then
+if [ $? -ne 0 ]; then
   echo SUCCESS
 else
   echo FAILURE
 fi
 
 yum install mysql-community-server -y
+if [ $? -ne 0 ]; then
+  echo SUCCESS
+else
+  echo FAILURE
+fi
 
 systemctl enable mysqld
 systemctl restart mysqld
