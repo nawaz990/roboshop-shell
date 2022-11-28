@@ -13,3 +13,5 @@ DEFAULT_PASSWORD=$(grep 'A temporary password'  /var/log/mysqld.log | awk '{prin
 
 cat /tmp/root-pass-sql | mysql --connect-expired-password -uroot -p"${DEFAULT_PASSWORD}"
 
+
+
