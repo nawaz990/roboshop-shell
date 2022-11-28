@@ -20,6 +20,12 @@ else
 fi
 
 systemctl enable mysqld
+if [ $? -ne 0 ]; then
+  echo SUCCESS
+else
+  echo FAILURE
+fi
+
 systemctl restart mysqld
 
 echo show databases | mysql -uroot -pRoboshop@1
