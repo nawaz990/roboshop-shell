@@ -1,8 +1,8 @@
 STAT() {
   if [ $1 -eq 0 ]; then
-    echo SUCCESS
+    echo -e "\e[32mSUCCESS\e[0m"
   else
-    echo FAILURE
+    echo -e "\e[31mFAILURE\e[0m"
     exit
   fi
 }
