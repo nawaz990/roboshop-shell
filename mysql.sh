@@ -18,7 +18,7 @@ PRINT() {
   echo "\e[33m$1\e[0m"
 }
 
-echo -e "\e[33mDownloading MySQL Repo file\e[0m"
+echo -e "Downloading MySQL Repo file"
 curl -s -L -o /etc/yum.repos.d/mysql.repo https://raw.githubusercontent.com/roboshop-devops-project/mysql/main/mysql.repo
 STAT $?
 
