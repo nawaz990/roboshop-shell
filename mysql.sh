@@ -1,3 +1,5 @@
+source common.sh
+
 if [ -z "$1" ]; then
   echo Input argument Password is needed
   exit
