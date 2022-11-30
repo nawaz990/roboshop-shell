@@ -1,3 +1,8 @@
+if [ -z "$1" ]; then
+  echo Input argument Password is needed
+  exit
+fi
+
 ROBOSHOP_MYSQL_PASSWORD=$1
 
 echo -e "\e[33mDownloading MySQL Repo file\e[0m"
