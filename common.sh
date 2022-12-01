@@ -33,7 +33,7 @@ NODEJS() {
 
   PRINT "Download App Content"
   curl -s -L -o /tmp/${COMPONENT}.zip "https://github.com/roboshop-devops-project/${COMPONENT}/archive/main.zip" &>>$LOG
-  STAT$?
+  STAT $?
 
   PRINT "Remove Previous Version of App"
   cd /home/roboshop &>>$LOG
@@ -53,7 +53,7 @@ NODEJS() {
 
   PRINT "Configure Endpoints for System Configuration"
   sed -i -e 's/REDIS_ENDPOINT/redis.devopsb69.online/' -e 's/CATALOGUE_ENDPOINT/catalogue.devopsb69.online/' /home/roboshop/${COMPONENT}/server.js
-  Stat $?
+  STAT $?
 
   PRINT "Reload Systemd"
   systemctl daemon-reload &>>$LOG
