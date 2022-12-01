@@ -48,6 +48,8 @@ NODEJS() {
   fi
   STAT $?
 
+DOWNLOAD_APP_CODE
+
   mv ${COMPONENT}-main ${COMPONENT}
   cd ${COMPONENT}
 
