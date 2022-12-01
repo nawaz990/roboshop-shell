@@ -1,19 +1,43 @@
-curl -s -o /etc/yum.repos.d/mongodb.repo https://raw.githubusercontent.com/roboshop-devops-project/mongodb/main/mongo.repo
+COMPONENT=mongodb
+source common.sh
 
+PRINT "Download Yum Repo File"
+curl -s -o /etc/yum.repos.d/mongodb.repo https://raw.githubusercontent.com/roboshop-devops-project/mongodb/main/mongo.repo &>>$LOG
+STAT $?
 
-yum install -y mongodb-org
-sed -i -e 's/127.0.0.1/0.0.0.0' /etc/mongod.conf
+PRINT "Install Mongodb"
+yum install -y mongodb-org &>>$LOG
+STAT $?
 
+PRINT "Configure Mongodb Listen Address"
+sed -i -e 's/127.0.0.1/0.0.0.0' /etc/mongod.conf &>>$LOG
+STAT $?
 
-systemctl enable mongod
-systemctl restart mongod
+PRINT "Enable Mongodb"
+systemctl enable mongod &>>$LOG
+STAT $?
 
+PRINT "Start Mongodb"
+systemctl restart mongod &>>$LOG
+STAT $?
+exit
 
-curl -s -L -o /tmp/mongodb.zip "https://github.com/roboshop-devops-project/mongodb/archive/main.zip"
-
+PRINT ""
+curl -s -L -o /tmp/mongodb.zip "https://github.com/roboshop-devops-project/mongodb/archive/main.zip" &>>$LOG
+STAT $?
 cd /tmp
-unzip -o mongodb.zip
-cd mongodb-main
-mongo < catalogue.js
-mongo < users.js
 
+
+PRINT ""
+unzip -o mongodb.zip &>>$LOG
+STAT $?
+
+cd mongodb-main &>>$LOG
+
+PRINT ""
+mongo < catalogue.js &>>$LOG
+STAT $?
+
+PRINT ""
+mongo < users.js &>>$LOG
+STAT $?
