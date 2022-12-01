@@ -2,35 +2,35 @@ COMPONENT=cart
 source common.sh
 
 PRINT "Install NodeJS Repos"
-curl -sL https://rpm.nodesource.com/setup_lts.x | bash &>>&LOG
+curl -sL https://rpm.nodesource.com/setup_lts.x | bash &>>$LOG
 STAT $?
 
 PRINT "Install NodeJS"
-yum install nodejs -y &>>&LOG
+yum install nodejs -y &>>$LOG
 STAT $?
 
 PRINT "Adding Application User"
-useradd roboshop &>>&LOG
+useradd roboshop &>>$LOG
 STAT $?
 
 PRINT "Download App Content"
-curl -s -L -o /tmp/cart.zip "https://github.com/roboshop-devops-project/cart/archive/main.zip" &>>&LOG
+curl -s -L -o /tmp/cart.zip "https://github.com/roboshop-devops-project/cart/archive/main.zip" &>>$LOG
 STAT$?
 
 PRINT "Remove Previous Version of App"
-cd /home/roboshop &>>&LOG
-rm -rf cart &>>&LOG
+cd /home/roboshop &>>$LOG
+rm -rf cart &>>$LOG
 STAT $?
 
 PRINT "Extracting App Content"
-unzip -o /tmp/cart.zip &>>&LOG
+unzip -o /tmp/cart.zip &>>$LOG
 STAT $?
 
 mv cart-main cart
 cd cart
 
 PRINT "Install NodeJS Dependencies for App"
-npm install &>>&LOG
+npm install &>>$LOG
 STAT $?
 
 PRINT "Configure Endpoints for System Configuration"
@@ -42,13 +42,13 @@ mv /home/roboshop/cart/systemd.service /etc/systemd/system/cart.service
 STAT $?
 
 PRINT "Reload Systemd"
-systemctl daemon-reload &>>&LOG
+systemctl daemon-reload &>>$LOG
 STAT $?
 
 PRINT "Restart Cart"
-systemctl restart cart &>>&LOG
+systemctl restart cart &>>$LOG
 STAT $?
 
 PRINT "Enable Cart"
-systemctl enable cart &>>&LOG
+systemctl enable cart &>>$LOG
 STAT $?
