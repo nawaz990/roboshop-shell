@@ -3,7 +3,7 @@ CONTENT="*"
 source common.sh
 
 PRINT "Install Nginx"
-yum install nginx -y
+yum install nginx -y &>>$LOG
 STAT $?
 
 APP_LOC=/usr/share/nginx/html
@@ -17,10 +17,10 @@ mv frontend-main/localhost.conf /etc/nginx/default.d/roboshop.conf
 STAT $?
 
 PRINT "Enable Nginx Service"
-systemctl enable nginx
+systemctl enable nginx &>>$LOG
 STAT $?
 
 PRINT "Start Nginx Service"
-systemctl restart nginx
+systemctl restart nginx &>>$LOG
 STAT $?
 
