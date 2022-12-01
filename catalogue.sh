@@ -1,8 +1,20 @@
-curl --silent --location https://rpm.nodesource.com/setup_16.x | sudo bash -
-yum install nodejs -y
+source common.sh
 
-curl -sL https://rpm.nodesource.com/setup_lts.x | bash
+PRINT "Install NodeJS Repo"
+curl --silent --location https://rpm.nodesource.com/setup_16.x | sudo bash -
+STAT $?
+
+PRINT "Install NodeJS"
 yum install nodejs -y
+STAT $?
+
+PRINT "Install NodeJS Repo"
+curl -sL https://rpm.nodesource.com/setup_lts.x | bash
+STAT $?
+
+PRINT "Install NodeJS"
+yum install nodejs -y
+STAT $?
 
 useradd roboshop
 
