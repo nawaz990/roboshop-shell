@@ -1,4 +1,4 @@
-COMPONENT=python
+COMPONENT=payment
 source common.sh
 
 PYTHON
