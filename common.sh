@@ -112,7 +112,7 @@ PYTHON() {
   APP_USER=roboshop
 
   PRINT "Install Python"
-  yum install python36 gcc python3-devel -y
+  yum install python36 gcc python3-devel -y &>>$LOG
   STAT $?
 
   DOWNLOAD_APP_CODE
@@ -120,7 +120,7 @@ PYTHON() {
   cd ${COMPONENT}
 
   PRINT "Install the dependencies"
-  pip3 install -r requirements.txt
+  pip3 install -r requirements.txt &>>$LOG
   STAT $?
 
 }
