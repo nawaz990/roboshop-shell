@@ -15,12 +15,12 @@ $ curl -L -s -o /tmp/dispatch.zip https://github.com/roboshop-devops-project/dis
 
 
 unzip /tmp/dispatch.zip &>>$LOG
-mv dispatch-main dispatch
+mv dispatch-main dispatch &>>$LOG
 
 cd dispatch
 go mod init dispatch &>>$LOG
-go get
-go build
+go get &>>$LOG
+go build &>>$LOG
 
 
 SYSTEMD_SETUP
