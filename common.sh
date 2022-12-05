@@ -2,26 +2,27 @@ STAT() {
   if [ $1 -eq 0 ]; then
     echo -e "\e[32mSUCCESS\e[0m"
   else
-    echo Check the error in $LOG file
     echo -e "\e[31mFAILURE\e[0m"
-    exit
+    echo Check the error in $LOG file
+    exit 1
   fi
 }
 
 PRINT() {
-  echo " ------------------$1-------------------" >>${LOG}
+  echo " ------------------ $1 -------------------" >>${LOG}
   echo -e "\e[33m$1\e[0m"
 }
 
 LOG=/tmp/$COMPONENT.log
 rm -f $LOG
+set-hostname -skip-apply $COMPONENT
 
 DOWNLOAD_APP_CODE() {
   if [ ! -z "$APP_USER" ]; then
     PRINT "Adding Application User"
     id roboshop &>>$LOG
     if [ $? -ne 0 ]; then
-    useradd roboshop &>>$LOG
+      useradd roboshop &>>$LOG
     fi
     STAT $?
   fi
@@ -46,17 +47,10 @@ SYSTEMD_SETUP() {
     mv /home/roboshop/${COMPONENT}/systemd.service /etc/systemd/system/${COMPONENT}.service
     STAT $?
 
-  PRINT "Reload Systemd"
-  systemctl daemon-reload &>>$LOG
-  STAT $?
-
   PRINT "Restart ${COMPONENT}"
-  systemctl restart ${COMPONENT} &>>$LOG
+  systemctl daemon-reload &>>$LOG && systemctl restart ${COMPONENT} &>>$LOG && systemctl enable ${COMPONENT} &>>$LOG
   STAT $?
 
-  PRINT "Enable ${COMPONENT}"
-  systemctl enable ${COMPONENT} &>>$LOG
-  STAT $?
 }
 
 NODEJS() {
@@ -91,7 +85,7 @@ JAVA() {
   APP_USER=roboshop
 
   PRINT "Install Maven"
-  yum install maven -y
+  yum install maven -y &>>$LOG
   STAT $?
 
   DOWNLOAD_APP_CODE
@@ -119,13 +113,13 @@ PYTHON() {
   mv ${COMPONENT}-main ${COMPONENT}
   cd ${COMPONENT}
 
-  PRINT "Install the dependencies"
+  PRINT "Install Python Dependencies"
   pip3 install -r requirements.txt &>>$LOG
   STAT $?
 
   USER_ID=$(id -u roboshop)
   GROUP_ID=$(id -g roboshop)
-  sed -i -e "/uid/ c uid = $(USER_ID)" payment.ini -e "/uid/ c uid = $(GROUP_ID)" ${COMPONENT}.ini
+  sed -i -e "/uid/ c uid = ${USER_ID}" -e "/uid/ c uid = ${GROUP_ID}" ${COMPONENT}.ini
 
  SYSTEMD_SETUP
 }
