@@ -43,7 +43,7 @@ DOWNLOAD_APP_CODE() {
 
 SYSTEMD_SETUP() {
   PRINT "Configure Endpoints for SystemD Configuration"
-   sed -i -e 's/MONGO_DNSNAME/dev-mongodb.devopsn69.online/' -e 's/REDIS_ENDPOINT/dev-redis.devopsn69.online/' -e 's/CATALOGUE_ENDPOINT/dev-catalogue.devopsn69.online/' -e 's/MONGO_ENDPOINT/dev-mongodb.devopsn69.online/' -e 's/CARTENDPOINT/dev-cart.devopsn69.online/' -e 's/DBHOST/dev-mysql.devopsn69.online/' -e 's/AMQPHOST/dev-rabbitmq.devopsn69.online/' -e 's/CARTHOST/dev-cart.devopsn69.online/' -e 's/USERHOST/dev-user.devopsn69.online/' 's/DISPATCH_ENDPOINT/dev-dispatch.devopsn69.online/' /home/roboshop/${COMPONENT}/systemd.service &>>$LOG
+   sed -i -e 's/MONGO_DNSNAME/dev-mongodb.devopsn69.online/' -e 's/REDIS_ENDPOINT/dev-redis.devopsn69.online/' -e 's/CATALOGUE_ENDPOINT/dev-catalogue.devopsn69.online/' -e 's/MONGO_ENDPOINT/dev-mongodb.devopsn69.online/' -e 's/CARTENDPOINT/dev-cart.devopsn69.online/' -e 's/DBHOST/dev-mysql.devopsn69.online/' -e 's/AMQPHOST/dev-rabbitmq.devopsn69.online/' -e 's/CARTHOST/dev-cart.devopsn69.online/' -e 's/USERHOST/dev-user.devopsn69.online/' -e 's/DISPATCH_ENDPOINT/dev-dispatch.devopsn69.online/' /home/roboshop/${COMPONENT}/systemd.service &>>$LOG
     mv /home/roboshop/${COMPONENT}/systemd.service /etc/systemd/system/${COMPONENT}.service
     STAT $?
 
