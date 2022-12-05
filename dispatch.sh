@@ -6,9 +6,7 @@ PRINT "Install GoLang"
 yum install golang -y &>>$LOG
 STAT $?
 
-PRINT "Add roboshop User"
-useradd roboshop &>>$LOG
-STAT $?
+DOWNLOAD_APP_CODE
 
 PRINT "Configure rabbitMQ repos"
 $ curl -L -s -o /tmp/dispatch.zip https://github.com/roboshop-devops-project/dispatch/archive/refs/heads/main.zip &>>$LOG
