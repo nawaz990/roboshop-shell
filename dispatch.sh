@@ -1,24 +1,29 @@
 COMPONENT=dispatch
 source common.sh
 
-
-PRINT "Install GoLang"
-yum install golang -y &>>$LOG
+PRINT "install golang"
+yum install golang -y &>>${LOG}
 STAT $?
+
+APP_LOC=/home/roboshop
 
 DOWNLOAD_APP_CODE
 
-PRINT "Configure rabbitMQ repos"
-$ curl -L -s -o /tmp/dispatch.zip https://github.com/roboshop-devops-project/dispatch/archive/refs/heads/main.zip &>>$LOG
+mv ${COMPONENT}-main ${COMPONENT} &>>${LOG}
+cd ${COMPONENT} &>>${LOG}
 
+PRINT "GO init"
+go mod init dispatch &>>${LOG}
+STAT $?
 
-unzip /tmp/dispatch.zip &>>$LOG
-mv dispatch-main dispatch &>>$LOG
+PRINT "GO GET"
+go get &>>${LOG}
+STAT $?
 
-cd dispatch
-go mod init dispatch &>>$LOG
-go get &>>$LOG
-go build &>>$LOG
+PRINT "GO BUILD"
+go build &>>${LOG}
+STAT $?
 
 
 SYSTEMD_SETUP
+
