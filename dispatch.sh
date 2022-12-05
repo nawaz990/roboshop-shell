@@ -1,5 +1,6 @@
 PRINT "Install GoLang"
 yum install golang -y &>>$LOG
+STAT $?
 
 PRINT "Add roboshop User"
 useradd roboshop &>>$LOG
