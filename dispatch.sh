@@ -3,7 +3,7 @@ source common.sh
 
 
 PRINT "Install GoLang"
-# yum install golang -y &>>$LOG
+yum install golang -y &>>$LOG
 STAT $?
 
 PRINT "Add roboshop User"
