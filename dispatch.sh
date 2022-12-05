@@ -16,14 +16,13 @@ PRINT "GO init"
 go mod init dispatch &>>${LOG}
 STAT $?
 
-PRINT "GO GET"
+PRINT "GO Get"
 go get &>>${LOG}
 STAT $?
 
-PRINT "GO BUILD"
+PRINT "Go Build"
 go build &>>${LOG}
 STAT $?
-
 
 SYSTEMD_SETUP
 
