@@ -1,6 +1,6 @@
 if [ -z "$1" ]; then
   echo Input argument Password is needed
-  exit
+  exit 1
 fi
 
 COMPONENT=mysql

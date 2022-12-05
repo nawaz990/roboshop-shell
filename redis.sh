@@ -22,5 +22,5 @@ systemctl enable redis &>>$LOG
 STAT $?
 
 PRINT "Start Redis service"
-systemctl start redis &>>$LOG
+systemctl restart redis &>>$LOG
 STAT $?
