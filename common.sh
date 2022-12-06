@@ -123,3 +123,35 @@ PYTHON() {
 
  SYSTEMD_SETUP
 }
+
+
+GO_LANG() {
+
+  APP_LOC=/home/roboshop
+  CONTENT=$COMPONENT
+  APP_USER=roboshop
+
+  PRINT "install golang"
+  yum install golang -y &>>${LOG}
+  STAT $?
+
+ DOWNLOAD_APP_CODE
+
+  mv ${COMPONENT}-main ${COMPONENT} &>>${LOG}
+  cd ${COMPONENT} &>>${LOG}
+
+  PRINT "GO init"
+  go mod init dispatch &>>${LOG}
+  STAT $?
+
+  PRINT "GO GET"
+  go get &>>${LOG}
+  STAT $?
+
+  PRINT "GO BUILD"
+  go build &>>${LOG}
+  STAT $?
+
+
+  SYSTEMD_SETUP
+}
