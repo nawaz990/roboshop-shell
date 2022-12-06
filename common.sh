@@ -125,7 +125,7 @@ PYTHON() {
 }
 
 
-GO_LANG() {
+GOLANG() {
 
   APP_LOC=/home/roboshop
   CONTENT=$COMPONENT
