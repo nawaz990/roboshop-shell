@@ -131,7 +131,7 @@ GO_LANG() {
   CONTENT=$COMPONENT
   APP_USER=roboshop
 
-  PRINT "install golang"
+  PRINT "Install GoLang"
   yum install golang -y &>>${LOG}
   STAT $?
 
@@ -140,15 +140,15 @@ GO_LANG() {
   mv ${COMPONENT}-main ${COMPONENT} &>>${LOG}
   cd ${COMPONENT} &>>${LOG}
 
-  PRINT "GO init"
+  PRINT "Go init"
   go mod init dispatch &>>${LOG}
   STAT $?
 
-  PRINT "GO GET"
+  PRINT "GO Get"
   go get &>>${LOG}
   STAT $?
 
-  PRINT "GO BUILD"
+  PRINT "Go Build"
   go build &>>${LOG}
   STAT $?
 
